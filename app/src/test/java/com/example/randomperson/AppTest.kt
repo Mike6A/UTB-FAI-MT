@@ -6,10 +6,10 @@ import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
+import org.junit.BeforeClass
 import org.junit.Test
 
-class ApiTest {
-
+class AppTest {
     @Test
     fun testCallApi() = runBlocking {
         val app = RandomPersonApplication()

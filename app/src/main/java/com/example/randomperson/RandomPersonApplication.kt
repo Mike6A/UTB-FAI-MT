@@ -2,6 +2,8 @@ package com.example.randomperson
 
 import android.app.Application
 import com.example.randomperson.api.PeopleGeneratorApiService
+import com.example.randomperson.service.PersonDataRepository
+import com.example.randomperson.service.RandomPersonService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,4 +16,9 @@ class RandomPersonApplication : Application() {
 
         retrofit.create(PeopleGeneratorApiService::class.java)
     }
+
+    val personService: RandomPersonService = RandomPersonService(
+        apiService,
+        PersonDataRepository(DB.getDatabase(this).personDAO())
+    )
 }
