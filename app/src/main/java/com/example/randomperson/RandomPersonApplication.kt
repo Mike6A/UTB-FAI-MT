@@ -17,8 +17,12 @@ class RandomPersonApplication : Application() {
         retrofit.create(PeopleGeneratorApiService::class.java)
     }
 
-    val personService: RandomPersonService = RandomPersonService(
-        apiService,
-        PersonDataRepository(DB.getDatabase(this).personDAO())
-    )
+    val personService: RandomPersonService by lazy {
+        RandomPersonService(
+            apiService,
+            PersonDataRepository(getDatabase(this).personDAO()))
+    }
+    override fun onCreate() {
+        super.onCreate()
+    }
 }

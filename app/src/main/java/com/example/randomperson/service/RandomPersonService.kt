@@ -1,7 +1,6 @@
 package com.example.randomperson.service
 
 import com.example.randomperson.api.PeopleGeneratorApiService
-import com.example.randomperson.entity.PersonData
 import com.example.randomperson.model.Person
 import com.example.randomperson.model.PersonListModel
 
@@ -28,7 +27,10 @@ class RandomPersonService(
     }
 
     suspend fun savePerson(person: Person) {
-        personRepository.insertPerson(person)
+        if (person.id == null || person.id == 0)
+            personRepository.insertPerson(person)
+        else
+            personRepository.updatePerson(person)
     }
 
     suspend fun deletePerson(person: Person) {

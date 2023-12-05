@@ -36,7 +36,7 @@ data class PersonData(
     @ColumnInfo(name = "address_city")
     val city: String,
 
-    @ColumnInfo(name = "address_city")
+    @ColumnInfo(name = "address_state")
     val state: String,
 
     @ColumnInfo(name = "address_country")

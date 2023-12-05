@@ -15,25 +15,17 @@ abstract class DB : RoomDatabase() {
 
     abstract fun personDAO() : PersonDAO
 
-    companion object {
-        @Volatile
-        private var INSTANCE: DB? = null
+}
 
-        fun getDatabase(context: Context) : DB {
-            val tempInstance = INSTANCE
-            if (tempInstance != null)
-                return tempInstance
+private lateinit var INSTANCE: DB
 
-            synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    DB::class.java,
-                    "random_person_db"
-                ).build()
-                INSTANCE = instance
-                return instance
-            }
+fun getDatabase(context: Context) : DB {
+    synchronized(DB::class.java) {
+        if (!::INSTANCE.isInitialized) {
+            INSTANCE = Room.databaseBuilder(context.applicationContext,
+                DB::class.java,
+                "random_person_db").build()
         }
     }
-
+    return INSTANCE
 }

@@ -15,6 +15,13 @@ class PersonDataRepository(private val personDAO: PersonDAO) {
         personDAO.insertPerson(PersonData.create(person))
     }
 
+    suspend fun updatePerson(person: Person?){
+        if (person == null || person.id == 0)
+            return;
+
+        personDAO.updatePerson(PersonData.create(person))
+    }
+
     suspend fun getPerson(id: Int) : Person? {
         val res = personDAO.getPerson(id) ?: return null;
         return Person.create(res)
