@@ -37,20 +37,26 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/design_default_color_error"
                 android:layout_height="wrap_content"
-                android:enabled="@{!viewModel.isNew}"
+                android:onClick="@{() -> viewModel.deletePerson()}"
+                android:visibility="@{!viewModel.isNew ? View.VISIBLE : View.GONE}"
                 android:text="Delete" />
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:backgroundTint="#2dac36"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> viewModel.savePerson()}"
+                android:visibility="@{viewModel.isNew ? View.VISIBLE : View.GONE}"
                 android:text="Save" />
         </LinearLayout>
 
@@ -93,7 +99,8 @@
                     android:layout_marginLeft="10dp"
                     android:ems="10"
                     android:text="@{viewModel.person.name}"
-                    android:enabled="@{viewModel.editable}"
+                    android:focusable="@{viewModel.editable}"
+                    android:onClick="@{() -> viewModel.copyToClipboard(viewModel.person.name)}"
                     android:inputType="text"/>
 
                 <TextView
@@ -113,7 +120,8 @@
                     android:layout_marginLeft="10dp"
                     android:ems="10"
                     android:text="@{viewModel.person.age}"
-                    android:enabled="@{viewModel.editable}"
+                    android:focusable="@{viewModel.editable}"
+                    android:onClick="@{() -> viewModel.copyToClipboard(viewModel.person.age)}"
                     android:inputType="numberSigned" />
 
                 <TextView
@@ -133,7 +141,8 @@
                     android:layout_marginLeft="10dp"
                     android:ems="10"
                     android:text="@{viewModel.person.job}"
-                    android:enabled="@{viewModel.editable}"
+                    android:focusable="@{viewModel.editable}"
+                    android:onClick="@{() -> viewModel.copyToClipboard(viewModel.person.job)}"
                     android:inputType="text" />
 
                 <TextView
@@ -153,7 +162,8 @@
                     android:layout_marginLeft="10dp"
                     android:ems="10"
                     android:text="@{viewModel.person.email}"
-                    android:enabled="@{viewModel.editable}"
+                    android:focusable="@{viewModel.editable}"
+                    android:onClick="@{() -> viewModel.copyToClipboard(viewModel.person.email)}"
                     android:inputType="textEmailAddress" />
 
                 <TextView
@@ -173,7 +183,8 @@
                     android:layout_marginLeft="10dp"
                     android:ems="10"
                     android:text="@{viewModel.person.gender}"
-                    android:enabled="@{viewModel.editable}"
+                    android:focusable="@{viewModel.editable}"
+                    android:onClick="@{() -> viewModel.copyToClipboard(viewModel.person.gender)}"
                     android:inputType="text" />
 
                 <TextView
@@ -193,7 +204,8 @@
                     android:layout_marginLeft="10dp"
                     android:ems="10"
                     android:text="@{viewModel.person.username}"
-                    android:enabled="@{viewModel.editable}"
+                    android:focusable="@{viewModel.editable}"
+                    android:onClick="@{() -> viewModel.copyToClipboard(viewModel.person.username)}"
                     android:inputType="text" />
 
                 <com.google.android.material.divider.MaterialDivider
@@ -219,7 +231,8 @@
                     android:layout_marginLeft="10dp"
                     android:ems="10"
                     android:text="@{viewModel.person.address.streetAddress}"
-                    android:enabled="@{viewModel.editable}"
+                    android:focusable="@{viewModel.editable}"
+                    android:onClick="@{() -> viewModel.copyToClipboard(viewModel.person.address.streetAddress)}"
                     android:inputType="text" />
 
                 <TextView
@@ -239,7 +252,8 @@
                     android:layout_marginLeft="10dp"
                     android:ems="10"
                     android:text="@{viewModel.person.address.city}"
-                    android:enabled="@{viewModel.editable}"
+                    android:focusable="@{viewModel.editable}"
+                    android:onClick="@{() -> viewModel.copyToClipboard(viewModel.person.address.city)}"
                     android:inputType="text"/>
 
                 <TextView
@@ -259,7 +273,8 @@
                     android:layout_marginLeft="10dp"
                     android:ems="10"
                     android:text="@{viewModel.person.address.state}"
-                    android:enabled="@{viewModel.editable}"
+                    android:focusable="@{viewModel.editable}"
+                    android:onClick="@{() -> viewModel.copyToClipboard(viewModel.person.address.state)}"
                     android:inputType="text"/>
 
                 <TextView
@@ -279,7 +294,8 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:text="@{viewModel.person.address.country}"
-                    android:enabled="@{viewModel.editable}"
+                    android:focusable="@{viewModel.editable}"
+                    android:onClick="@{() -> viewModel.copyToClipboard(viewModel.person.address.country)}"
                     android:inputType="text" />
 
                 <TextView
@@ -299,7 +315,8 @@
                     android:layout_marginLeft="10dp"
                     android:ems="10"
                     android:text="@{viewModel.person.address.zip}"
-                    android:enabled="@{viewModel.editable}"
+                    android:focusable="@{viewModel.editable}"
+                    android:onClick="@{() -> viewModel.copyToClipboard(viewModel.person.address.zip)}"
                     android:inputType="text" />
 
             </LinearLayout>

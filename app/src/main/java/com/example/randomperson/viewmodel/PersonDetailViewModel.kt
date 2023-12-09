@@ -1,12 +1,19 @@
 package com.example.randomperson.viewmodel
 
+import android.R.attr.label
+import android.R.attr.text
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.util.Log
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.randomperson.model.Person
 import com.example.randomperson.service.RandomPersonService
 import kotlinx.coroutines.launch
+
 
 class PersonDetailViewModel(
     private val personService: RandomPersonService
@@ -21,6 +28,8 @@ class PersonDetailViewModel(
     val isNew = MutableLiveData<Boolean>(false)
 
     val closeActivity = MutableLiveData<Boolean>(false)
+
+    val copyToClipboard = MutableLiveData<String>("")
 
     fun openWithNewPerson(){
         isNew.value = true
@@ -79,4 +88,10 @@ class PersonDetailViewModel(
             }
         }
     }
+
+
+    fun copyToClipboard(value: String) {
+        copyToClipboard.value = value
+    }
+
 }

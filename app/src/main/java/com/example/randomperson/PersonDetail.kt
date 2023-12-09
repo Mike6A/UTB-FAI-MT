@@ -1,7 +1,11 @@
 package com.example.randomperson
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.randomperson.databinding.ActivityPersonDetailBinding
 import com.example.randomperson.viewmodel.PersonDetailViewModel
@@ -41,7 +45,20 @@ class PersonDetail : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.closeActivity.observe(this, {value -> if (value) finish() })
+        viewModel.closeActivity.observe(this) { value -> if (value) finish() }
+
+        viewModel.copyToClipboard.observe(this) { value ->
+            if (!value.isNullOrEmpty()) {
+                val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                val clip = ClipData.newPlainText("Person data", value)
+                clipboard.setPrimaryClip(clip)
+
+                val toast = Toast.makeText(this, "Copied to clipboard!", Toast.LENGTH_SHORT)
+                toast.show()
+
+                viewModel.copyToClipboard.value = ""
+            }
+        }
     }
 
 }

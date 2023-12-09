@@ -11,26 +11,43 @@
             type="com.example.randomperson.viewmodel.MainViewModel" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_margin="5dp"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/my_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/newPerson"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="20dp"
-            app:srcCompat="@drawable/plus_icon" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="60dp"
+                />
 
-    </RelativeLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/newPerson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="20dp"
+                app:srcCompat="@drawable/plus_icon" />
+
+        </RelativeLayout>
+    </LinearLayout>
 </layout>

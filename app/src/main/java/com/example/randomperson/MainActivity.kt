@@ -24,8 +24,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        setSupportActionBar(binding.myToolbar)
 
-        //todo supporbar
+        // showing the back button in action bar
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         val app = application as RandomPersonApplication
         viewModel = ViewModelProvider(this, ViewModelFactory(app.personService))
@@ -44,18 +46,21 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.list.observe(this, {
-                value -> listAdapter.list = value
-                listAdapter.notifyDataSetChanged()
-        })
-
-        viewModel.loadData()
+        viewModel.list.observe(this) { value ->
+            listAdapter.list = value
+            listAdapter.notifyDataSetChanged()
+        }
 
         binding.newPerson.setOnClickListener {
             startActivity(Intent(this, PersonDetail::class.java).apply {
                 putExtra("isNew", true)
             })
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.loadData()
     }
 
     fun showPerson(model: PersonListModel){
